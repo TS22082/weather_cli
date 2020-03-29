@@ -20,6 +20,25 @@ inquirer
         .then(res => {
           const data = res.data;
           console.log(data);
+
+          console.log("--------------------");
+
+          const tableData = {};
+          for (item in data.main) {
+            switch (item) {
+              case "pressure":
+                tableData[item] = data.main[item] + "mbar";
+                break;
+              case "humidity":
+                tableData[item] = data.main[item] + "ah";
+                break;
+              default:
+                tableData[item] = data.main[item] + "F°";
+                break;
+            }
+          }
+
+          console.table(tableData);
         })
         .catch(() => {
           console.log("No weather information found for this zipcode");
